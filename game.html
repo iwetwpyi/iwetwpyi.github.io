@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고래 이름 맞추기 게임</title>
+    <style>
+        @font-face {
+            font-family: 'Ownglyph_meetme-Rg';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_1@1.0/Ownglyph_meetme-Rg.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            text-align: center;
+            background-color: azure;
+            font-size: 20px;
+            font-family: 'Ownglyph_meetme-Rg', sans-serif;
+        }
+        h1 {
+            color: #00bfff;
+            font-size: 40px;
+        }
+        #guess-input {
+            margin-top: 20px;
+            width: 200px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid lightgray;
+            border-radius: 5px;
+            font-family: 'Ownglyph_meetme-Rg', sans-serif;
+        }
+        #submit-btn {
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: #00bfff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Ownglyph_meetme-Rg', sans-serif;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: rgb(54, 211, 255);
+        }
+    </style>
+</head>
+<body>
+    <h1>고래 친구들의 이름을 찾아줘!</h1>
+    <p>이건 지금까지 본 고래들의 이름을 맞추는 게임이야.</p>
+    <p>아래에 나타나는 사진을 잘 보고 답해주면 돼.</p>
+    <p>힌트를 줄게!</p>
+    <p id="hint">이 고래는 이름이 4글자야.</p>
+    <img id="whale-image" src="C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\1.귀신고래.png" width="200px" height="auto">
+    <p id="name-hint"> ㄱㅅ고래</p>
+    <p>어떤 고래일까?</p>
+    <input type="text" id="guess-input" placeholder="여기에 정답을 입력해줘" onclick="clearPlaceholder()">
+    <button id="submit-btn">도전</button>
+    <div id="result"></div>
+
+    <script>
+        
+
+        var whales = [
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\1.귀신고래.png",
+                answer: "귀신고래",
+                hint: "이 고래는 이름이 4글자야.",
+                nameHint: "ㄱㅅ고래"
+            },
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\2.png",
+                answer: "남방큰돌고래",
+                hint: "이 고래는 이름이 6글자야.",
+                nameHint: "ㄴㅂㅋ돌고래"
+            },
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\3.대왕고래.png",
+                answer: "대왕고래",
+                hint: "이 고래는 이름이 4글자야.",
+                nameHint: "ㄷㅇ고래"
+            },
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\4.보리고래.png",
+                answer: "보리고래",
+                hint: "이 고래는 이름이 4글자야.",
+                nameHint: "ㅂㄹ고래"
+            },
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\5.png",
+                answer: "북방긴수염고래",
+                hint: "이 고래는 이름이 7글자야.",
+                nameHint: "ㅂㅂㄱㅅㅇ고래"
+            },
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\6.브라이드고래.png",
+                answer: "브라이드고래",
+                hint: "이 고래는 이름이 6글자야.",
+                nameHint: "ㅂㄹㅇㄷ고래"
+            },
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\7.상괭이.png",
+                answer: "상괭이",
+                hint: "이 고래는 이름이 3글자야.",
+                nameHint: "상ㄱㅇ"
+            },
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\8.참고래.png",
+                answer: "참고래",
+                hint: "이 고래는 이름이 3글자야.",
+                nameHint: "ㅊ고래"
+            },
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\9.png",
+                answer: "향고래",
+                hint: "이 고래는 이름이 3글자야.",
+                nameHint: "ㅎ고래"
+            },
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\10.png",
+                answer: "혹등고래",
+                hint: "이 고래는 이름이 4글자야.",
+                nameHint: "ㅎㄷ고래"
+            },
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\11.범고래.png",
+                answer: "범고래",
+                hint: "이 고래는 이름이 3글자야.",
+                nameHint: "ㅂ고래"
+            },
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\12.png",
+                answer: "흑범고래",
+                hint: "이 고래는 이름이 4글자야.",
+                nameHint: "ㅎㅂ고래"
+            },
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\13.png",
+                answer: "큰돌고래",
+                hint: "이 고래는 이름이 4글자야.",
+                nameHint: "ㅋ돌고래"
+            },
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\14.낫돌고래.png",
+                answer: "낫돌고래",
+                hint: "이 고래는 이름이 4글자야.",
+                nameHint: "ㄴ돌고래"
+            },
+            {
+                image: "C:\\Users\\82108\\OneDrive\\바탕 화면\\학교\\vsc_웹디자인\\고래 색깔버전\\15.png",
+                answer: "참돌고래",
+                hint: "이 고래는 이름이 4글자야.",
+                nameHint: "ㅊ돌고래"
+            },
+        ];
+
+        var currentWhaleIndex = 0;
+var correctAnswers = 0;
+var totalQuestions = 3;
+
+document.getElementById('guess-input').addEventListener('keydown', function(event) {
+    if (event.key === "Enter") {
+        submitAnswer();
+    }
+});
+
+function clearPlaceholder() {
+    document.getElementById('guess-input').placeholder = "";
+}
+
+document.getElementById('submit-btn').addEventListener('click', submitAnswer);
+
+function submitAnswer() {
+    var guess = document.getElementById('guess-input').value.trim();
+    var answer = whales[currentWhaleIndex].answer;
+    
+    console.log(`User guess: ${guess}, Correct answer: ${answer}`);
+
+    if (guess === answer) {
+        correctAnswers++;
+        document.getElementById('result').innerText = "정답이야! 대단한 걸?";
+        setTimeout(function() {
+            if (correctAnswers < totalQuestions) {
+                loadNextWhale();
+            } else {
+                document.getElementById('result').innerText = "모든 문제를 맞췄어! 축하해!";
+                document.getElementById('result').style.color = "rgb(255, 92, 141)";
+                document.getElementById('result').style.fontSize = "40px";
+                document.getElementById('whale-image').src = "C:/Users/82108/OneDrive/바탕 화면/학교/vsc_웹디자인/물고기.png";
+                document.getElementById('whale-image').style.margin = "60px";
+                document.getElementById('hint').style.display = 'none';
+                document.getElementById('name-hint').style.display = 'none';
+                document.getElementById('guess-input').style.display = 'none';
+                document.getElementById('submit-btn').style.display = 'none';
+
+                document.querySelectorAll('p:nth-of-type(1), p:nth-of-type(2), p:nth-of-type(3), p:nth-of-type(4), p:nth-of-type(6)').forEach(function(element) {
+                    element.style.display = 'none';
+                });
+            }
+        }, 1000); 
+    } else {
+        document.getElementById('result').innerText = "틀렸어ㅜㅜ 다시 해보자!";
+    }
+}
+
+function loadNextWhale() {
+    currentWhaleIndex = Math.floor(Math.random() * whales.length);
+    var whale = whales[currentWhaleIndex];
+    document.getElementById('whale-image').src = whale.image;
+    document.getElementById('hint').innerText = whale.hint;
+    document.getElementById('name-hint').innerText = whale.nameHint;
+    document.getElementById('guess-input').value = "";
+    document.getElementById('result').innerText = "";
+}
+
+    </script>
+</body>
+</html>
