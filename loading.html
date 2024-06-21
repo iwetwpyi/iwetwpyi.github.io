@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진입중</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+  @font-face {
+    font-family: 'Ownglyph_meetme-Rg';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_1@1.0/Ownglyph_meetme-Rg.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f3f3f3;
+    font-family: 'Ownglyph_meetme-Rg', sans-serif; 
+  }
+
+  .container {
+    text-align: center;
+    position: relative;
+  }
+
+  .bubble-container {
+    width: 200px;
+    height: 200px; 
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .bubble {
+    width: 30px; 
+    height: 30px;
+    background-color: #00bfff;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    animation: bubbleUp 3s ease-in-out infinite;
+  }
+
+  .bubble:nth-child(2) {
+    width: 50px; 
+    height: 50px;
+    animation-delay: 1s;
+  }
+
+  .bubble:nth-child(3) {
+    width: 70px; 
+    height: 70px;
+    animation-delay: 2s;
+  }
+
+  @keyframes bubbleUp {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(-150px) scale(1.5);
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(-300px) scale(2);
+      opacity: 0;
+    }
+  }
+
+  .text {
+    margin-top: 20px;
+    font-size: 24px;
+    font-family: 'Ownglyph_meetme-Rg', sans-serif;
+  }
+</style>
+</head>
+<body>
+   
+<div class="container">
+  <div class="bubble-container">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
+  <div class="text">바닷속으로 들어가는 중</div>
+</div>
+
+<script>
+  window.onload = function() {
+    setTimeout(function() {
+      window.location.href = "main.html";
+    }, 4000); 
+  };
+</script>
+
+</body>
+</html>
