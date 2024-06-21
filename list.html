@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <title>list.목록</title>
+  <style>
+    header {
+      font-family: "Poetsen One", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      background-color: #B4D1FF;
+      color: #000000;
+      padding: 20px;
+      margin: auto;
+      font-size: 60px;
+      text-align: center;
+    }
+    body {
+      margin: 0;
+      overflow-x: hidden; 
+    }
+    .custom-font {
+      font-size: 20px;
+    }
+    .container1 {
+      width: auto;
+      height: auto;
+      margin: auto;
+      display: block;
+      width: 100%;
+    }
+    .container1 img {
+      display: block;
+      width: 100%;
+    }
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .moving-image {
+      position: absolute;
+      top: 200px;
+      left: -100px;
+      animation: moveImage 2s linear forwards; 
+    }
+    @keyframes moveImage {
+      0% { left: -100px; } 
+      100% { 
+        left: calc(100% - 100px); 
+        opacity: 0; 
+      }
+    }
+    .container2 img {
+      position: absolute;
+      height: auto;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.5s ease; 
+      cursor: pointer;
+    }
+    .container2.show img {
+      opacity: 1; 
+    }
+    .container9 {
+      position: absolute; 
+      top: 5%; 
+      left: 3%; 
+      height: auto;
+    }
+    .container10 {
+      position: absolute; 
+      top: 6%; 
+      left: 93%; 
+      z-index: 100;
+      cursor: pointer;
+    }
+    .image1 {
+      top: 43%;
+      left: 35%;
+      width: 15%;
+    }
+    .image2 {
+      top: 50%;
+      left: 15%;
+      width: 20%;
+    }
+    .image3 {
+      top: 73%;
+      left: 37%;
+      width: 16%;
+    }
+    .image4 {
+      top: 58%;
+      left: 40%;
+      width: 15%;
+    }
+    .image5 {
+      top: 75%;
+      left: 57%;
+      width: 18%;
+    }
+    .image6 {
+      top: 85%;
+      left: 25%;
+      width: 15%;
+    }
+    .image7 {
+      top: 70%;
+      left: 75%;
+      width: 10%;
+    }
+    .image8 {
+      top: 53%;
+      left: 27%;
+      width: 15%;
+    }
+    .image9 {
+      top: 48%;
+      left: 45%;
+      width: 20%;
+    }
+    .image10 {
+      top: 37%;
+      left: 55%;
+      width: 20%;
+    }
+    .image11 {
+      top: 50%;
+      left: 65%;
+      width: 15%;
+    }
+    .image12 {
+      top: 64%;
+      left: 55%;
+      width: 20%;
+    }
+    .image13 {
+      top: 85%;
+      left: 44%;
+      width: 20%;
+    }
+    .image14 {
+      top: 70%;
+      left: 20%;
+      width: 15%;
+    }
+    .image15 {
+      top: 86%;
+      left: 65%;
+      width: 15%;
+    }
+    .modal {
+      display: none;
+      position: absolute;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 130%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+      background-color: #fefefe;
+      text-align: center;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 500px;
+      position: relative;
+      border-radius: 2%;
+    }
+    .p {
+      display: flex; 
+      justify-content: space-around; 
+      align-items:inherit;
+      border-collapse: collapse; 
+      width: 100%;
+    }
+    .info-item {
+      text-align: center; 
+      padding: 10px; 
+      flex: 1; 
+      border-bottom: 1px solid #000;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 40px;
+      font-weight: bold;
+      position: absolute;
+      top: 1%; 
+      right: 3%; 
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    z-index: 1000;
+    border-radius: 5px; 
+    top: 115%; 
+    right: 50%; 
+}
+
+.dropdown-content a {
+    color: rgb(63, 63, 63);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #cbcbcb;
+    margin: 1% 0%;
+}
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+  </style>
+</head>
+
+<body>
+  
+  <img src="img/1.귀신고래.png" alt="귀신고래" class="moving-image" width="auto" height="90%">
+
+  <div class="modal" id="myModal1">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="img/1.귀신고래.png" width="60%" height="auto">
+      <h2>귀신고래</h2>
+      <div class="p">
+        <div class="info-item">
+          <p>몸길이</p>
+          <p>16m</p>
+        </div>
+        <div class="info-item">
+          <p>무게</p>
+          <p>30t</p>
+        </div>
+        <div class="info-item">
+          <p>수명</p>
+          <p>70년</p>
+        </div>
+        <div class="info-item">
+          <p>멸종위기</p>
+          <p>관심대상</p>
+        </div>
+        <div class="info-item">
+          <p>사는곳</p>
+          <p>북태평양</p>
+        </div>
+      </div>
+      <br>특이사항<br><br>
+      귀신 고래는 성질이 포악해<br> 
+      옛날 고래 잡이를 하던 어부들을<br> 공격하는 경우가 많았어.<br> 
+      그래서 Devil fish, <br>일명 귀신고래라는 별명이 붙었지.
+    </div>
+  </div>
+
+
+  <div class="modal" id="myModal2">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="img/2.png" width="60%" height="auto">
+      <h2>남방큰돌고래</h2>
+      <div class="p">
+        <div class="info-item">
+          <p>몸길이</p>
+          <p>2.6m</p>
+        </div>
+        <div class="info-item">
+          <p>무게</p>
+          <p>230kg</p>
+        </div>
+        <div class="info-item">
+          <p>수명</p>
+          <p>40년</p>
+        </div>
+        <div class="info-item">
+          <p>멸종위기</p>
+          <p>정보부족</p>
+        </div>
+        <div class="info-item">
+          <p>사는곳</p>
+          <p>인도양, <br>남태평양</p>
+        </div>
+      </div>
+      <br>특이사항<br><br>
+남방큰돌고래는 똑똑한 걸로 유명한 고래야.<br>
+해변에서 연주하는 사람들의 노래를 듣고 <br>높이 뛰면서 춤을 춘다고 전해져.<br>
+우리 나라에서는 제주도 주변에서만 볼 수 있어.
+    </div>
+  </div>
+
+
+  <div class="modal" id="myModal3">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="img/3.대왕고래.png" width="60%" height="auto">
+      <h2>대왕고래</h2>
+      <div class="p">
+        <div class="info-item">
+          <p>몸길이</p>
+          <p>33m</p>
+        </div>
+        <div class="info-item">
+          <p>무게</p>
+          <p>179t</p>
+        </div>
+        <div class="info-item">
+          <p>수명</p>
+          <p>100년</p>
+        </div>
+        <div class="info-item">
+          <p>멸종위기</p>
+          <p>위기</p>
+        </div>
+        <div class="info-item">
+          <p>사는곳</p>
+          <p>남극해</p>
+        </div>
+      </div>
+      <br>특이사항<br><br>
+    지금 볼 수 있는 동물 중에서<br>
+     그리고 지금까지 존재했던 동물 중에서 <br>가장 무거운 동물이야.<br>
+     그만큼 바다 속에서는 적이 없는데,<br>
+     새끼 대왕고래는 범고래에게 <br>잡아먹힐 수 있어서 조심해야 해.
+    </div>
+  </div>
+
+
+  <div class="modal" id="myModal4">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="img/4.보리고래.png" width="60%" height="auto">
+      <h2>보리고래</h2>
+      <div class="p">
+        <div class="info-item">
+          <p>몸길이</p>
+          <p>15m</p>
+        </div>
+        <div class="info-item">
+          <p>무게</p>
+          <p>179t</p>
+        </div>
+        <div class="info-item">
+          <p>수명</p>
+          <p>70년</p>
+        </div>
+        <div class="info-item">
+          <p>멸종위기</p>
+          <p>위기</p>
+        </div>
+        <div class="info-item">
+          <p>사는곳</p>
+          <p>전세계</p>
+        </div>
+      </div>
+      <br>특이사항<br><br>
+   보리고래는 다른 고래들에 비해<br> 크기가 작은 편이야.<br>
+   보리가 익는 시기에 나타난다고 해서 <br>보리고래라는 이름이 붙었어.<br>
+   무리지은 정어리 주변을 맴돌다가 잡아먹어서<br>
+   정어리 고래라고도 불리지.
+    </div>
+  </div>
+
+  <div class="modal" id="myModal5">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="img/5.png" width="60%" height="auto">
+      <h2>북방긴수염고래</h2>
+      <div class="p">
+        <div class="info-item">
+          <p>몸길이</p>
+          <p>18m</p>
+        </div>
+        <div class="info-item">
+          <p>무게</p>
+          <p>100t</p>
+        </div>
+        <div class="info-item">
+          <p>수명</p>
+          <p>70년</p>
+        </div>
+        <div class="info-item">
+          <p>멸종위기</p>
+          <p>위기</p>
+        </div>
+        <div class="info-item">
+          <p>사는곳</p>
+          <p>북태평양</p>
+        </div>
+      </div>
+      <br>특이사항<br><br>
+주로 북쪽에서 발견되는 북방긴수염고래는 <br>
+물 위에서 장난치는 걸 좋아한다고 해.<br>
+우리나라의 동해안에서 볼 수 있는데 <br>
+옛날에 외국 사람들이 이 고래를 따라 왔다가<br>
+우리나라 섬 독도를 발견했다는 이야기도 있어.
+    </div>
+  </div>
+
+
+  <div class="modal" id="myModal6">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="
+      img/6.브라이드고래.png" width="60%" height="auto">
+      <h2>브라이드고래</h2>
+      <div class="p">
+        <div class="info-item">
+          <p>몸길이</p>
+          <p>14m</p>
+        </div>
+        <div class="info-item">
+          <p>무게</p>
+          <p>100t</p>
+        </div>
+        <div class="info-item">
+          <p>수명</p>
+          <p>60년</p>
+        </div>
+        <div class="info-item">
+          <p>멸종위기</p>
+          <p>정보부족</p>
+        </div>
+        <div class="info-item">
+          <p>사는곳</p>
+          <p>북태평양<br>서태평양</p>
+        </div>
+      </div>
+      <br>특이사항<br><br>
+브라이드 고래는 헤엄치다가도<br> 종종 물 밖으로 튀어올라.<br>
+이때 높이는 6m 정도로 아주 높이 뛸 수 있지.<br>
+그리고 호기심이 많고 사람을 좋아해서<br>
+배를 따라 수영하는 모습을 자주 볼 수 있어.<br>
+    </div>
+  </div>
+
+  
+  <div class="modal" id="myModal7">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="
+      img/7.상괭이.png" width="60%" height="auto">
+      <h2>상괭이</h2>
+      <div class="p">
+        <div class="info-item">
+          <p>몸길이</p>
+          <p>150cm<p>
+        </div>
+        <div class="info-item">
+          <p>무게</p>
+          <p>60kg</p>
+        </div>
+        <div class="info-item">
+          <p>수명</p>
+          <p>30년</p>
+        </div>
+        <div class="info-item">
+          <p>멸종위기</p>
+          <p>취약<p>
+        </div>
+        <div class="info-item">
+          <p>사는곳</p>
+          <p>우리나라 서해</p>
+        </div>
+      </div>
+      <br>특이사항<br><br>
+우리나라 토종 돌고래인 상괭이는<br>
+예전부터 흔하게 발견됐어.<br>
+상괭이라는 이름도 '수면 위로 드러난 몸이 <br>
+물빛에 반사되어 반들반들 광택이 난다'는 뜻이야. <br>
+최근에는 상괭이 얼굴이 웃는 것처럼 보인다고 해서 <br> 
+미소 고래, 웃는 고래라는 별명도 생겼어. 
+</div>
+  </div>
+
+  
+  <div class="modal" id="myModal8">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="
+      img/8.참고래.png" width="60%" height="auto">
+      <h2>참고래</h2>
+      <div class="p">
+        <div class="info-item">
+          <p>몸길이</p>
+          <p>23m</p>
+        </div>
+        <div class="info-item">
+          <p>무게</p>
+          <p>75t</p>
+        </div>
+        <div class="info-item">
+          <p>수명</p>
+          <p>100년</p>
+        </div>
+        <div class="info-item">
+          <p>멸종위기</p>
+          <p>정보부족</p>
+        </div>
+        <div class="info-item">
+          <p>사는곳</p>
+          <p>전세계<br> 대양</p>
+        </div>
+      </div>
+      <br>특이사항<br><br>
+참고래는 다른 고래들과 다르게<br> 무리 짓지 않고 따로 움직여.<br>
+또 자기가 태어난 곳을 찾아가는 습성이 있어.<br>
+이때 새끼 참고래는 어미와 함께 이동하는데,<br>
+이 모험에서 새끼 참고래는 <br>다양한 도전과 위험을 겪지.<br>
+</div>
+  </div>
+
+  
+  <div class="modal" id="myModal9">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="
+      img/9.png" width="60%" height="auto">
+      <h2>향고래(향유고래)</h2>
+      <div class="p">
+        <div class="info-item">
+          <p>몸길이</p>
+          <p>18m</p>
+        </div>
+        <div class="info-item">
+          <p>무게</p>
+          <p>36t</p>
+        </div>
+        <div class="info-item">
+          <p>수명</p>
+          <p>50년</p>
+        </div>
+        <div class="info-item">
+          <p>멸종위기</p>
+          <p>취약</p>
+        </div>
+        <div class="info-item">
+          <p>사는곳</p>
+          <p>전세계</p>
+        </div>
+      </div>
+      <br>특이사항<br><br>
+      이빨을 가진 동물 중에서는 지구상에서 제일 커.<br>
+      나이가 먹을 수록 몸이 흰색으로 변해.<br>
+      머리도 점점 커져서 나중에는<br> 몸의 3분의 1을 머리가 차지해.<br>
+      잠수를 아주 잘해서 1시간 30분이나 <br>물 속에 있을 수 있어.
+</div>
+  </div>
+  
+  <div class="modal" id="myModal10">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="
+      img/10.png" width="60%" height="auto">
+      <h2>혹등고래</h2>
+      <div class="p">
+        <div class="info-item">
+          <p>몸길이</p>
+          <p>16m</p>
+        </div>
+        <div class="info-item">
+          <p>무게</p>
+          <p>40t</p>
+        </div>
+        <div class="info-item">
+          <p>수명</p>
+          <p>60년</p>
+        </div>
+        <div class="info-item">
+          <p>멸종위기</p>
+          <p>관심대상</p>
+        </div>
+        <div class="info-item">
+          <p>사는곳</p>
+          <p>대서양</p>
+        </div>
+      </div>
+      <br>특이사항<br><br>
+     혹등 고래는 아주 긴 거리를 <br>이동하면서 새끼를 낳고 길러.<br>
+     이때 어미 고래는 새끼에게 하루에<br> 400리터 이상의 모유를 먹이는데,<br>
+     도중에 거의 아무것도 먹지 않아.<br>
+    그래서 암컷 혹등고래가 <br>수컷 혹등고래에 비해 큰 편이야.
+     
+</div>
+  </div>
+
+  
+  <div class="modal" id="myModal11">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="
+      img/11.범고래.png" width="60%" height="auto">
+      <h2>범고래</h2>
+      <div class="p">
+        <div class="info-item">
+          <p>몸길이</p>
+          <p>10m</p>
+        </div>
+        <div class="info-item">
+          <p>무게</p>
+          <p>10t</p>
+        </div>
+        <div class="info-item">
+          <p>수명</p>
+          <p>45년</p>
+        </div>
+        <div class="info-item">
+          <p>멸종위기</p>
+          <p>정보부족</p>
+        </div>
+        <div class="info-item">
+          <p>사는곳</p>
+          <p>먹이가 <br>많은 바다</p>
+        </div>
+      </div>
+      <br>특이사항<br><br>
+      범고래는 모든 고래 중에 <br>가장 넓은 지역에 사는 고래로,<br>
+      아주 똑똑하고 튼튼해서<br> 많은 바다 생물 중에 가장 위협적이야.<br>
+     범고래는 특이하게 사는 모습이 두 가지로 나뉘어.<br>
+     여러 바다를 이동하면서 살거나,<br>
+     한 곳에 머무르면서 생활하지.<br>
+</div>
+  </div>
+
+
+  <div class="modal" id="myModal12">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="img/12.png" width="60%" height="auto">
+      <h2>흑범고래</h2>
+      <div class="p">
+        <div class="info-item">
+          <p>몸길이</p>
+          <p>6m</p>
+        </div>
+        <div class="info-item">
+          <p>무게</p>
+          <p>2t</p>
+        </div>
+        <div class="info-item">
+          <p>수명</p>
+          <p>56년</p>
+        </div>
+        <div class="info-item">
+          <p>멸종위기</p>
+          <p>정보부족</p>
+        </div>
+        <div class="info-item">
+          <p>사는곳</p>
+          <p>따뜻한 <br>바다</p>
+        </div>
+      </div>
+      <br>특이사항<br><br>
+
+가짜 범고래라고 불릴 만큼 <br>범고래랑 비슷한 생김새를 가졌어.<br>
+구별하려면 몸의 색을 보면 되는데,<br>
+검은색인 범고래와 다르게<br>
+흑범고래는 온몸이 짙은 회색이야.<br>
+우리나라 동해안에서 발견되는데<br>
+아직 많이 연구된 고래는 아니야.
+</div>
+</div>
+
+      <div class="modal" id="myModal13">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <img src="img/13.png" width="60%" height="auto">
+          <h2>큰돌고래</h2>
+          <div class="p">
+            <div class="info-item">
+              <p>몸길이</p>
+              <p>3.7m</p>
+            </div>
+            <div class="info-item">
+              <p>무게</p>
+              <p>500t</p>
+            </div>
+            <div class="info-item">
+              <p>수명</p>
+              <p>30년</p>
+            </div>
+            <div class="info-item">
+              <p>멸종위기</p>
+              <p>정보부족</p>
+            </div>
+            <div class="info-item">
+              <p>사는곳</p>
+              <p>육지 주변 <br> 바다</p>
+            </div>
+          </div>
+          <br>특이사항<br><br>
+          돌고래 중에 가장 커.<br>
+          다양한 소리를 내기도 하는데,<br>
+         머리에 있는 숨구멍에서 삐걱이는 소리나<br>
+         숨구멍 아래에 있는 코에서 휘파람 소리가 나.<br>
+         또 꼬리를 물에 내리쳐서<br> 신호를 보내기도 해.<br>
+         이렇게 소리를 내서 근처에 있는 <br>물건의 위치를 알아채지.
+          </div>
+          </div>
+      
+          <div class="modal" id="myModal14">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <img src="img/14.낫돌고래.png" width="60%" height="auto">
+              <h2>낫돌고래</h2>
+              <div class="p">
+                <div class="info-item">
+                  <p>몸길이</p>
+                  <p>2.3m</p>
+                </div>
+                <div class="info-item">
+                  <p>무게</p>
+                  <p>90kg</p>
+                </div>
+                <div class="info-item">
+                  <p>수명</p>
+                  <p>37년</p>
+                </div>
+                <div class="info-item">
+                  <p>멸종위기</p>
+                  <p>관심대상</p>
+                </div>
+                <div class="info-item">
+                  <p>사는곳</p>
+                  <p>북태평양</p>
+                </div>
+              </div>
+              <br>특이사항<br><br>
+              무리짓는 걸 아주 좋아하는 고래야.<br>
+              수백마리에서 수천마리까지 한번에 관찰돼.<br>
+              뛰거나 회전하는 행동을 반복하지.<br>
+              참돌고래와 비슷해 보이지만,<br>
+              짧고 두터운 주둥이를 가진 게 특징이야.
+  </div></div>
+
+  
+  <div class="modal" id="myModal15">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="img/15.png" width="60%" height="auto">
+      <h2>참돌고래</h2>
+      <div class="p">
+        <div class="info-item">
+          <p>몸길이</p>
+          <p>2.3m</p>
+        </div>
+        <div class="info-item">
+          <p>무게</p>
+          <p>110kg</p>
+        </div>
+        <div class="info-item">
+          <p>수명</p>
+          <p>40년</p>
+        </div>
+        <div class="info-item">
+          <p>멸종위기</p>
+          <p>관심대상</p>
+        </div>
+        <div class="info-item">
+          <p>사는곳</p>
+          <p>따뜻한 <br>바다</p>
+        </div>
+      </div>
+      <br>특이사항<br><br>
+      가장 대표적인 돌고래 종류야.<br>
+    그리스 신화, 로마 신화나<br> 그림 속에서도 자주 보이고<br>
+    작은 몸집을 가지고 있어.<br>
+    양쪽 턱에 많은 이빨이 나있고<br>
+    하나의 콧구멍을 가지고 있지.
+
+
+      </div>
+      </div>
+  
+  <header>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    LIST<br>
+    <div class="custom-font">
+      국가보호종 고래목록
+    </div>
+  </header>
+
+  <div class="container9">
+    <a href="main.html">
+      <img src="img/홈아이콘.png" width="35%">
+    </a>
+  </div>
+
+ <div class="dropdown container10">
+    <img src="img/메뉴아이콘.png" alt="메뉴 아이콘" width="43%">
+    <div class="dropdown-content">
+        <a href="why.html">
+          <img src="img/자산 20돈.png" width="15%" style="margin-right: 5%;">
+          목적</a>
+          <a href="cites.html">
+            <img src="img/자산 21돈.png" width="15%" style="margin-right: 5%;">
+            국제무역</a>
+        <a href="iwc.html">
+          <img src="img/자산 22돈.png" width="15%" style="margin-right: 5%;">
+          고래사냥</a>
+        <a href="list.html">
+          <img src="img/자산 23돈.png" width="15%" style="margin-right: 5%;">
+          고래도감
+        </a>
+        <a href="game.html">
+          <img src="img/자산 24돈.png" width="15%" style="margin-right: 5%;">
+          미니게임</a>
+    </div>
+</div>
+
+  <div class="container1">
+    <img src="img/리스트-배경.jpg">
+  </div>
+
+  <div class="container2">
+
+    <div class="container2">
+      <img src="img/1.귀신고래.png" alt="귀신고래" class="image1" data-modal="myModal1">
+      <img src="img/2.png" alt="남방큰돌고래" class="image2" data-modal="myModal2">
+    <img src="img/3.대왕고래.png" alt="대왕고래"  class="image3" data-modal="myModal3">
+
+    <img src="img/4.보리고래.png" alt="보리고래"  class="image4" data-modal="myModal4">
+    <img src="img/5.png" alt="북방긴수염고래"  class="image5" data-modal="myModal5">
+
+    <img src="img/6.브라이드고래.png"  class="image6" data-modal="myModal6">
+    <img src="img/7.상괭이.png" alt="상괭이"  class="image7" data-modal="myModal7">
+
+    <img src="img/8.참고래.png" alt="참고래" class="image8" data-modal="myModal8">
+    <img src="img/9.png" alt="향고래"  class="image9" data-modal="myModal9">
+    <img src="img/10.png" alt="혹등고래"  class="image10" data-modal="myModal10">
+
+    <img src="img/11.범고래.png" alt="범고래" class="image11"data-modal="myModal11">
+    <img src="img/12.png" alt="흑범고래" class="image12" data-modal="myModal12">
+
+    <img src="img/13.png" alt="큰돌고래" class="image13" data-modal="myModal13">
+    <img src="img/14.낫돌고래.png"   class="image14" alt="낫돌고래" data-modal="myModal14">
+    <img src="img/15.png" alt="참돌고래" class="image15" data-modal="myModal15">
+  </div>
+
+  <script>
+   function showModal(modalId) {
+      var modal = document.getElementById(modalId);
+      modal.style.display = "block";
+    }
+
+    function showImages() {
+      document.querySelector('.container2').classList.add('show');
+    }
+    setTimeout(showImages, 1000);
+
+    var closeBtns = document.querySelectorAll(".close");
+    closeBtns.forEach(function(btn) {
+      btn.onclick = function() {
+        var modal = btn.closest('.modal');
+        modal.style.display = "none";
+      }
+    });
+
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = "none";
+      }
+    }
+
+    var images = document.querySelectorAll('.container2 img');
+    images.forEach(function(img) {
+      img.onclick = function() {
+        var modalId = img.getAttribute('data-modal');
+        showModal(modalId);
+      }
+    });
+  </script>
+</body>
+</html>
